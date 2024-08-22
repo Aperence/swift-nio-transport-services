@@ -157,7 +157,9 @@ internal final class NIOTSConnectionChannel: StateManagedNWConnectionChannel {
     internal var connectPromise: EventLoopPromise<Void>?
 
     internal var parameters: NWParameters {
-        NWParameters(tls: self.tlsOptions, tcp: self.tcpOptions)
+        let parameters = NWParameters(tls: self.tlsOptions, tcp: self.tcpOptions)
+        parameters.multipathServiceType = self.multipathServiceType
+        return parameters
     }
 
     /// The TCP options for this connection.
